@@ -2,13 +2,13 @@
 
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent
+RUTA_DATA = Path(__file__).resolve().parent
 
 # Path(__file__) Trae la ruta del archivo donde esta posicionada la función.
 # .resolve() es un funcion que transforma cualquier ruta relativa en absoluta.
 # .parente sube una carpeta, es decir, se va a obtener al ruta de la carpeta contenedora.
 
-RUTA_JSON = BASE_DIR / "data" / "transactions.json"
+RUTA_JSON =RUTA_DATA / "data" / "transactions.json"
 
 # Se definen las categorias de transacción disponibles
 
