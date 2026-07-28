@@ -3,6 +3,7 @@ from pathlib import Path
 from storage.json_handler import load_transactions, save_transactions
 from core.validator import validate_amount, validate_date, validate_category
 from core.calculator import calculate_category_totals, calculate_totals
+from cli.formatter import format_currency, format_trasaction_table, print_summary
 
 def main ():
     load_transactions(config.RUTA_JSON)
@@ -19,8 +20,10 @@ def main ():
     {"Monto:": 20, "Tipo:": "gasto", "Categoria:": "Transporte"},
     ]
     print(calculate_totals(test_data))
-
     print(calculate_category_totals(test_data))
+    print(format_trasaction_table(test_data))
+    hola = {'Total de ingresos:': 1000, 'Total de gastos:': 100, 'Balance:': 900}
+    print(print_summary(hola))
 
 if __name__ == "__main__":
     main()
