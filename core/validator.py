@@ -1,5 +1,12 @@
-from datetime import datetime
+from datetime import datetime, date
 # Es importante destacar que la "doble importación" en realidad no es lo que aparenta, sino que es un por su modulo y otra por la función 
+def validate_type(type_transaction):
+    if type_transaction.lower().strip() == "ingreso":
+        return True
+    elif type_transaction.lower().strip() == "gasto":
+        return True
+    else:
+        return False
 
 def validate_amount (amount_str):
         try:
@@ -24,7 +31,7 @@ def validate_category (category_str, valid_categories):
 
 def validate_date (date_str):
     try:
-        fecha = datetime.strptime(date_str, "%d/%m/%Y")
+        datetime.strptime(date_str.strip(), "%Y-%m-%d")
         return True
     except ValueError:
         print ("Formato de la fecha incorrecto.")
