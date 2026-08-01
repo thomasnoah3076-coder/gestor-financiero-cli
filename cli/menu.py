@@ -26,50 +26,44 @@ def get_transaction_input(id_actual):
 
     nuevo_id = id_actual + 1
     
-    valido = False
-    while not valido:
+    while True:
         tipo_valor = input("Ingrese el tipo de transacción (Gasto/Ingreso): ")
         valido = validate_type(tipo_valor)
-        if not valido:
-            print(" Tipo de transacción inválida. Por favor vuelva a ingresar.")
+        if valido: break
+        else: print(" Tipo de transacción inválida. Por favor vuelva a ingresar.")
 
-    valido = False
-    while not valido:
+    while True:
         monto_valor = input("Ingrese el monto de la transacción: ")
-        valido = validate_amount(monto_valor)
-        if not valido:
-            print(" Monto inválido. Por favor vuelva a ingresar.")
+        valido, monto_valido = validate_amount(monto_valor)
+        if valido: break
+        else: print(" Monto inválido. Por favor vuelva a ingresar.")
 
-    valido = False
-    while not valido:
+    while True:
         print("\nIngrese una de las categorías válidas:")
         for categoria in CATEGORIAS:
             print(f"- {categoria}")
-        
         categoria_valor = input("Categoría: ")
         valido = validate_category(categoria_valor, CATEGORIAS)
-        if not valido:
-            print(" Categoría inválida. Por favor vuelva a ingresar.")
+        if valido: break
+        else: print(" Categoría inválida. Por favor vuelva a ingresar.")
 
-    valido = False
-    while not valido:
+    while True:
         fecha_valor = input("Ingrese la fecha de la transacción (YYYY-MM-DD) o Enter para hoy: ")
         if not fecha_valor.strip():
             fecha_valor = datetime.today().strftime("%Y-%m-%d")
         valido = validate_date(fecha_valor)
-        if not valido:
-            print(" Formato de fecha inválido. Por favor vuelva a ingresar.")
-
+        if valido: break
+        else:print(" Formato de fecha inválido. Por favor vuelva a ingresar.")
+        
     descripcion_valor = input("Escriba una pequeña descripción por favor: ")
 
     # Limpiamos los textos con .strip() y formateamos montos/letras
     return {
         "id": nuevo_id,
         "tipo": tipo_valor.strip().capitalize(),
-        "monto": float(monto_valor.strip()), # Se convierte a float para cálculos numéricos
+        "monto": monto_valido.strip(), 
         "categoria": categoria_valor.strip().capitalize(),
         "fecha": fecha_valor.strip(),
         "descripcion": descripcion_valor.strip()
     }
-
 
