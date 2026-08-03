@@ -12,9 +12,9 @@ RUTA_JSON =RUTA_DATA / "data" / "transactions.json"
 
 # Se definen las categorias de transacción disponibles
 
-CATEGORIAS = {"Alimentación", "Transporte", "Servicios", "Entretenimiento", "Salario", "Otros", "Salud", "Regalos"}
+CATEGORIAS =["Alimentación", "Transporte", "Servicios", "Entretenimiento", "Salario", "Salud", "Regalos", "Otros"]
 
 # Se definem los tipos de transacción válidos
 
-TIPOS_TRANSACCION = {"Ingreso","Gasto"}
+TIPOS_TRANSACCION = ["Ingreso","Gasto"]
 

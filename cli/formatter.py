@@ -1,4 +1,5 @@
-from tabulate import tabulate 
+from tabulate import tabulate
+from config import CATEGORIAS
 
 def format_currency (amount):
     monto_EEUU = f"{amount:,.2f}"
@@ -19,4 +20,8 @@ def print_summary (totals):
     summary =""
     for clave, valor in totals.items():
         summary += f"{clave}"+f" {format_currency(valor)}\n"
-    return summary
+    return print(summary)
+
+def print_category_summary ():
+    for categoria in CATEGORIAS:
+        print(f"- {categoria}.")

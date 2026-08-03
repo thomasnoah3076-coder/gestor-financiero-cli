@@ -3,16 +3,14 @@ def calculate_totals (transactions):
     total_ingresos = 0
     total_gastos = 0 
     for transaction in transactions:
-        if transaction["Tipo:"] == "ingreso":
-            total_ingresos += transaction["Monto:"]
-        elif transaction["Tipo:"] == "gasto":
-            total_gastos += transaction["Monto:"]
-        else:
-            print("El tipo de transacción no es válido. Por favor verifique.")
+        if transaction.get("Tipo").lower().strip() == "ingreso":
+            total_ingresos += transaction.get("Monto")
+        elif transaction.get("Tipo").lower().strip() == "gasto":
+            total_gastos += transaction.get("Monto")
     saldo_neto ={
-        "Total de ingresos:":total_ingresos,
-        "Total de gastos:":total_gastos,
-        "Balance:": total_ingresos - total_gastos
+        "Total de ingresos":total_ingresos,
+        "Total de gastos":total_gastos,
+        "Balance": total_ingresos - total_gastos
     }
     return saldo_neto
 
@@ -25,24 +23,25 @@ def calculate_category_totals (transactions):
     regalos_total = 0
     otros_total = 0
     for transaction in transactions:
-        if transaction["Tipo:"] == "gasto":
-            match transaction["Categoria:"].strip():
-                case "Alimentación":
-                    alimentacion_total += transaction["Monto:"]
-                case "Transporte":
-                    transporte_total += transaction["Monto:"]
-                case "Servicios":
-                    servicios_total += transaction["Monto:"]
-                case "Entretenimiento":
-                    entretenimiento_total += transaction["Monto:"]
-                case "Salud":
-                    salud_total += transaction["Monto:"]
-                case "Regalos":
-                    regalos_total += transaction["Monto:"]
-                case "Otros":
-                    otros_total += transaction["Monto:"]
-                case _:
-                    otros_total += transaction["Monto:"]
+        match transaction.get("Categoría").strip():
+            case "Alimentación", "alimentacion":
+                alimentacion_total += transaction.get("Monto")
+            case "Transporte":
+                transporte_total += transaction.get("Monto")
+            case "Servicios":
+                servicios_total += transaction.get("Monto")
+            case "Entretenimiento":
+                entretenimiento_total += transaction.get("Monto")
+            case "Salario":
+                salario_total += transaction.get("Monto")
+            case "Salud":
+                salud_total += transaction.get("Monto")
+            case "Regalos":
+                regalos_total += transaction.get("Monto")
+            case "Otros":
+                otros_total += transaction.get("Monto")
+            case _:
+                otros_total += transaction.get("Monto")
     gastos_categorias = {
         "Alimentación":alimentacion_total, 
         "Transporte": transporte_total,

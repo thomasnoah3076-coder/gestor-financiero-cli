@@ -10,7 +10,7 @@ def load_transactions (ruta_json):
         try:
             print ("El archivo transactions.json existe.")
             with open(ruta_json, "r", encoding="utf-8") as a_lectura:
-                return json.load(a_lectura) # Se usa la funcion json.load () para convertir el contenido del json en datos reales (listas/diccionarios) en python. Si se usa la función realines se interpreta como texto plano.
+                return json.load(a_lectura) # Se usa la funcion json.load () para convertir el contenido del json en datos reales (listas/diccionarios) en python. Si se usa la función readlines se interpreta como texto plano.
         except json.decoder.JSONDecodeError:
             print("El archivo json esta corrupto o vacio.")
             return []

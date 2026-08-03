@@ -1,6 +1,58 @@
 [
     {
-        "amount": 100,
-        "category": "Otros"
+        "Id": 1,
+        "Tipo": "Ingreso",
+        "Monto": 837390.0,
+        "Categoría": "Servicios",
+        "Fecha": "2026-08-01",
+        "Descripción": "Hola 1"
+    },
+    {
+        "Id": 2,
+        "Tipo": "Ingreso",
+        "Monto": 2648394.0,
+        "Categoría": "Salud",
+        "Fecha": "2026-08-02",
+        "Descripción": "Hola 2"
+    },
+    {
+        "Id": 3,
+        "Tipo": "Gasto",
+        "Monto": 239040.0,
+        "Categoría": "Regalos",
+        "Fecha": "2026-08-02",
+        "Descripción": "Hola 3"
+    },
+    {
+        "Id": 4,
+        "Tipo": "Gasto",
+        "Monto": 210000.0,
+        "Categoría": "Transporte",
+        "Fecha": "2026-08-02",
+        "Descripción": "hola 4"
+    },
+    {
+        "Id": 5,
+        "Tipo": "Ingreso",
+        "Monto": 20000.0,
+        "Categoría": "Servicios",
+        "Fecha": "2026-08-02",
+        "Descripción": "hola 2"
+    },
+    {
+        "Id": 6,
+        "Tipo": "Gasto",
+        "Monto": 20000.0,
+        "Categoría": "Transporte",
+        "Fecha": "2026-08-02",
+        "Descripción": "hola 1"
+    },
+    {
+        "Id": 7,
+        "Tipo": "Ingreso",
+        "Monto": 25000.0,
+        "Categoría": "Alimentación",
+        "Fecha": "2026-08-02",
+        "Descripción": "hola 4"
     }
 ]

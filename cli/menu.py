@@ -1,3 +1,6 @@
+import sys
+sys.path.append('..')
+from cli.formatter import print_category_summary
 from config import CATEGORIAS
 from datetime import datetime
 from core.validator import validate_amount, validate_category, validate_date, validate_type
@@ -13,7 +16,7 @@ Bienvenido al gestor de finanzas de Thomas Chaparro. Por favor escriba el numero
 
 4. Filtrar por categoría.
 
-5. Salir''')
+5. Salir del programa.\n''')
 
 from datetime import datetime
 
@@ -40,12 +43,11 @@ def get_transaction_input(id_actual):
 
     while True:
         print("\nIngrese una de las categorías válidas:")
-        for categoria in CATEGORIAS:
-            print(f"- {categoria}")
+        print_category_summary()
         categoria_valor = input("Categoría: ")
-        valido = validate_category(categoria_valor, CATEGORIAS)
+        valido = validate_category(categoria_valor)
         if valido: break
-        else: print(" Categoría inválida. Por favor vuelva a ingresar.")
+        else: print(" Categoría inválida. Por favor, si ingreso una categoría correcta, verfique su correcta escritura.")
 
     while True:
         fecha_valor = input("Ingrese la fecha de la transacción (YYYY-MM-DD) o Enter para hoy: ")
@@ -54,16 +56,16 @@ def get_transaction_input(id_actual):
         valido = validate_date(fecha_valor)
         if valido: break
         else:print(" Formato de fecha inválido. Por favor vuelva a ingresar.")
-        
+
     descripcion_valor = input("Escriba una pequeña descripción por favor: ")
 
     # Limpiamos los textos con .strip() y formateamos montos/letras
     return {
-        "id": nuevo_id,
-        "tipo": tipo_valor.strip().capitalize(),
-        "monto": monto_valido.strip(), 
-        "categoria": categoria_valor.strip().capitalize(),
-        "fecha": fecha_valor.strip(),
-        "descripcion": descripcion_valor.strip()
+        "Id": nuevo_id,
+        "Tipo": tipo_valor.strip().capitalize(),
+        "Monto": monto_valido, 
+        "Categoría": categoria_valor.strip().capitalize(),
+        "Fecha": fecha_valor.strip(),
+        "Descripción": descripcion_valor.strip()
     }
 

@@ -1,29 +1,60 @@
-import config
+import cli
+from config import RUTA_JSON, RUTA_DATA, CATEGORIAS
 from pathlib import Path
 from storage.json_handler import load_transactions, save_transactions
-from core.validator import validate_amount, validate_date, validate_category
+from core.validator import  validate_category
 from core.calculator import calculate_category_totals, calculate_totals
-from cli.formatter import format_currency, format_trasaction_table, print_summary
+from cli.formatter import format_trasaction_table, print_category_summary, print_summary
+from cli.menu import get_transaction_input, display_menu
 
 def main ():
-    load_transactions(config.RUTA_JSON)
-    lista_prueba = [{"amount": 100, "category": "Otros"}]
-    save_transactions(config.RUTA_JSON, lista_prueba)
-    print(validate_amount("150.50"))  # Debería ser exitoso
-    print(validate_amount("-20"))      # Debería fallar
-    print(validate_date("2026-07-26")) # Debería ser exitoso
-    print(validate_date("26-07-2026")) # Debería fallar
-    test_data = [
-    {"Monto:": 1000, "Tipo:": "ingreso", "Categoria:": "Salario"},
-    {"Monto:": 50, "Tipo:": "gasto", "Categoria:": "Alimentación"},
-    {"Monto:": 30, "Tipo:": "gasto", "Categoria:": "Alimentación"},
-    {"Monto:": 20, "Tipo:": "gasto", "Categoria:": "Transporte"},
-    ]
-    print(calculate_totals(test_data))
-    print(calculate_category_totals(test_data))
-    print(format_trasaction_table(test_data))
-    hola = {'Total de ingresos:': 1000, 'Total de gastos:': 100, 'Balance:': 900}
-    print(print_summary(hola))
+    # Guardamos las transacciones cargadas desde el archivo JSON
+    transactions = load_transactions(RUTA_JSON)
+
+    display_menu()
+
+    while True:
+        option = input("Ingrese su opción: ")
+        match option:
+            case "1":
+                # Mostrar resumen de finanzas
+                    totals = calculate_totals(transactions)
+                    print_summary(totals)
+                    display_menu()
+            case "2":
+                # Registrar nueva transacción
+                id_actual = 0
+                if transactions: id_actual = transactions[-1]["Id"] 
+                # Obtiene el numero de ID de la ultima transaccion registrada, si no hay transacciones registradas el id_actual sera 0.
+                nueva_transaccion = get_transaction_input(id_actual)
+                transactions.append(nueva_transaccion)
+                save_transactions(RUTA_JSON, transactions)
+                print("-----Transacción registrada exitosamente.-----")
+                display_menu()
+            case "3":
+                # Ver historial de transacciones
+                print(format_trasaction_table(transactions))
+                display_menu()
+            case "4":
+                # Filtrar por categoría
+                print_category_summary()
+                categoria = input("Ingrese la categoría a filtrar: ")
+                if validate_category(categoria):
+                    trasactions_category = calculate_category_totals(transactions)
+                    for key, value in trasactions_category.items():
+                        if key.lower() == categoria.lower().strip():
+                            print(f"Total de gastos en {key}: {value}")
+                    display_menu()
+                else:
+                    print("Categoría inválida. Por favor, si ingreso una categoría correcta. Verfique su correcta escritura.")
+                    display_menu()
+            case "5":
+                print("Saliendo del programa...")
+                break
+            case _:
+                print("Opción inválida. Por favor intente nuevamente.")
+
+
 
 if __name__ == "__main__":
     main()

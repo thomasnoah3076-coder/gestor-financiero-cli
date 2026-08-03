@@ -1,4 +1,5 @@
 from datetime import datetime, date
+from config import CATEGORIAS
 # Es importante destacar que la "doble importación" en realidad no es lo que aparenta, sino que es un por su modulo y otra por la función 
 def validate_type(type_transaction):
     if type_transaction.lower().strip() == "ingreso":
@@ -20,13 +21,11 @@ def validate_amount (amount_str):
             return False, None
 # Válida el monto de la transacción.
 
-def validate_category (category_str, valid_categories):
-    for category in valid_categories:
+def validate_category (category_str):
+    for category in CATEGORIAS:
         if category.lower() == category_str.lower().strip():
             return True
-        else:
-            print("La categoría que se busco no sé encuentra disponible. Verifique por favor.")
-            return False
+    return False
 # Válida la categoría de la transacción.
 
 def validate_date (date_str):
