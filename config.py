@@ -4,7 +4,7 @@ from pathlib import Path
 
 RUTA_DATA = Path(__file__).resolve().parent
 
-# Path(__file__) Trae la ruta del archivo donde esta posicionada la función.
+# Path(__file__) Trae la ruta del archivo donde se esta ejecutando la función.
 # .resolve() es un funcion que transforma cualquier ruta relativa en absoluta.
 # .parente sube una carpeta, es decir, se va a obtener al ruta de la carpeta contenedora.
 
