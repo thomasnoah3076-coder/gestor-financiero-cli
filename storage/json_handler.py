@@ -5,7 +5,7 @@ import config
 def load_transactions (ruta_json):
     ruta_json.parent.mkdir(parents=True, exist_ok=True)
     # Se utiliza esta forma de verificar la existencia de la carpeta data por que no va a fallar.
-    # Es un codigo idempotente que dice, si no existe alguna de las carpetas padre no existe creala, y si ya la craste no lanzes un error.
+    # Es un codigo idempotente que dice, si no existe alguna de las carpetas padre creala, y si ya la craste no lanzes un error.
     if ruta_json.is_file():
         try:
             print ("El archivo transactions.json existe.")
